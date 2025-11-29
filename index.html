@@ -4,135 +4,417 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yebuna Fire</title>
-    <link rel="icon" type="image/x-icon" href="./images/logo.jpg">
+    <link rel="icon" type="image/x-icon" href="./images/logo-new.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-    * { font-family: "Montserrat", sans-serif; }
-    body { background-color: #121212; color: #ffffff; }
+        /* =========================
+           🌐 BASE STYLES
+        ========================= */
+        * {
+          font-family: "Montserrat", sans-serif;
+        }
+        body {
+          background-color: #121212;
+          color: #ffffff;
+        }
+        a {
+          transition: color 0.3s ease, text-decoration 0.3s ease;
+        }
+        a:hover,
+        a:focus {
+          color: yellow;
+          text-decoration: underline;
+        }
 
-    .navbar {
-        background-color: rgba(0, 0, 0, 0.7) !important;
-        backdrop-filter: blur(2px);
-        box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        border-bottom: 1px solid white;
-    }
+        /* =========================
+           🧭 NAVIGATION BAR
+        ========================= */
+        .navbar {
+          background-color: rgba(33, 17, 17, 0.7) !important;
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+          border-radius: 100px;
+          transition: background-color 0.3s ease;
+        }
+        .nav-link {
+          color: white !important;
+          text-transform: uppercase;
+          font-size: 12px;
+          position: relative;
+          display: inline-block;
+          transition: color 0.3s ease;
+        }
+        .nav-link::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: -3px;
+          width: 0%;
+          height: 2px;
+          background-color: yellow;
+          transition: width 0.3s ease;
+        }
+        .nav-link:hover,
+        .nav-link:focus {
+          color: yellow !important;
+        }
+        .nav-link:hover::after,
+        .nav-link.active::after {
+          width: 100%;
+        }
+        #nav-contact-us:hover {
+          filter: drop-shadow(0 0 8px white);
+        }
 
-    .navbar #logo { width: 30px; }
+        /* =========================
+           🏠 HERO SECTION
+        ========================= */
+        #hero-title {
+          font-size: 90px;
+        }
+        #hero-title #yebuna,
+        #hero-title #fire {
+          text-shadow: 5px 8px black;
+        }
+        #tagline {
+          font-size: 20px;
+          letter-spacing: 9px;
+          margin-top: -10px;
+          padding-left: 68px !important;
+        }
+        #call-to-action {
+          margin-left: 68px !important;
+        }
 
-    .bg-light { background-color: #2c2c2c !important; }
-    .card { background-color: #333333; color: #ffffff; }
+        /* =========================
+           📦 COMPONENTS
+        ========================= */
+        .card {
+          background-color: transparent !important;
+          transition: transform 0.4s ease, box-shadow 0.4s ease;
+          color: white;
+        }
+        .card:hover {
+          transform: translateY(-10px) scale(1.03);
+          box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+        .card-img-top {
+          aspect-ratio: 1 / 1;
+          object-fit: contain;
+          background-color: #f3e3d3;
+        }
+        #products .card-body {
+          background-color: rgba(33, 17, 17, 0.7) !important;
+        }
 
-    #particles-js {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        z-index: 0;
-        top: 0;
-        left: 0;
-    }
+        .btn-light {
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .btn-light:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+        }
 
-    .card-img-top {
-        aspect-ratio: 1 / 1;
-        object-fit: cover;
-    }
-    /* Small screens */
-    @media (max-width: 767.98px) {
-        #home {
+        .btn-link {
+          color: yellow;
+          text-decoration: none;
+          transition: color 0.3s ease, text-decoration 0.3s ease;
+        }
+        .btn-link:hover,
+        .btn-link:focus {
+          color: #ffd700;
+          text-decoration: underline;
+        }
+
+        .contact-us {
+          background-color: transparent;
+          border-radius: 50px;
+          padding: 8px 16px;
+          font-size: 12px;
+          transition: all 0.3s ease;
+        }
+        .contact-us:hover,
+        .contact-us:focus {
+          text-decoration: none;
+          font-size: 20px;
+        }
+
+        /* =========================
+           ☎ CONTACT ICONS
+        ========================= */
+        #contact-icons i {
+          font-size: 25px;
+          text-shadow: 0px 2px black;
+          color: white;
+          transition: transform 0.3s ease, color 0.3s ease;
+        }
+        #contact-icons i:hover {
+          transform: scale(1.3);
+          filter: drop-shadow(0 0 8px white);
+        }
+
+        #contact-icons a:hover {
+                font-size: 25px;
+                filter: drop-shadow(0 0 8px white);
+        }
+
+        #contact-icons a{
+            text-shadow: 0px 2px black;
+        }
+
+        /* =========================
+           ✨ ANIMATIONS & EFFECTS
+        ========================= */
+        section:not(#home) {
+          opacity: 0;
+          transform: translateY(50px);
+          transition: all 0.8s ease-out;
+        }
+        section:not(#home).visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        .mug-shadow {
+          filter: drop-shadow(-20px 10px 20px rgba(0, 0, 0, 0.6));
+        }
+
+        /* =========================
+           📱 RESPONSIVE DESIGN
+        ========================= */
+
+        /* Small Screens */
+        @media (max-width: 767.98px) {
+          .navbar {
+            border-radius: 10px !important;
+          }
+          .navbar-nav {
+            gap: 0.5rem !important;
+          }
+          .navbar-toggler {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+          }
+          .navbar-toggler-icon {
+            filter: invert(1);
+          }
+          .contact-us {
+            font-size: 10px;
+            padding-top: 12px;
+            padding-bottom: 12px;
+          }
+
+          #home {
             position: relative;
             min-height: 100vh;
-            width: 100%;
-            background: url('./images/coffee-bean-ai2.png') no-repeat center center / cover;
-            overflow: hidden;
+            background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6)),
+              url('./images/background-1b.JPEG') no-repeat center center / cover;
             display: flex;
             align-items: center;
             justify-content: start;
             padding-left: 50px;
             padding-top: 20px;
-        }
-        #home h1, p { text-shadow: 2px 2px black; }
-        #home a { 
-            box-shadow: 5px 10px rgba(0,0,0,0.5); 
+          }
+          #about {
+            background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6)),
+              url('./images/background-3b.png') no-repeat center center / cover;
+          }
+          #products {
+            background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6)),
+              url('./images/background-2b.png') no-repeat center center / cover;
+          }
+          #contact {
+            background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6)),
+              url('./images/background-4b.png') no-repeat center center / cover;
+          }
+
+          #home h1 {
+            font-size: 50px;
+            padding-left: 20px !important;
+          }
+          #hero-title #yebuna,
+          #hero-title #fire {
+            text-shadow: 5px 5px black;
+          }
+          #home a {
+            box-shadow: 5px 10px rgba(0, 0, 0, 0.5);
             font-weight: bold;
-        }
-        #about, #contact {
+          }
+          #tagline {
+            padding-left: 30px !important;
+          }
+          #call-to-action {
+            margin-left: 30px !important;
+          }
+
+          #about, #contact {
             min-height: 50vh;
             display: flex;
             align-items: center;
             justify-content: start;
-        }
-        #about #about-img { box-shadow: 0px 10px rgba(0,0,0,0.5); width: 90%; }
-        #products a{
-            box-shadow: 0px 10px rgba(0,0,0,0.5); 
+          }
+          #about #about-img {
+            box-shadow: 0px 10px rgba(0, 0, 0, 0.5);
+            width: 90%;
+          }
+          #products a {
+            box-shadow: 0px 10px rgba(0, 0, 0, 0.5);
             font-weight: bold;
+          }
+          #contact #contact-img {
+            box-shadow: 0px 10px rgba(0, 0, 0, 0.5);
+          }
         }
-        #contact #contact-img { box-shadow: 0px 10px rgba(0,0,0,0.5); }
-    }
 
-    /* Medium and up screens */
-    @media (min-width: 768px) {
-        #home {
+        /* Medium & Up Screens */
+        @media (min-width: 768px) {
+          #home {
             position: relative;
             min-height: 100vh;
-            width: 100%;
-            background: url('./images/coffee-bean-ai2.png') no-repeat center center / cover;
-            overflow: hidden;
+            background: url('./images/background.png') no-repeat center center / cover;
             display: flex;
             align-items: center;
             justify-content: start;
             padding-left: 100px;
-        }
-        #home h1 { text-shadow: 4px 4px black; }
-        #home p { text-shadow: 2px 2px black; }
-        #home a { 
-            box-shadow: 5px 10px rgba(0,0,0,0.5); 
+          }
+          #about {
+            background: url('./images/background-3.png') no-repeat center center / cover;
+          }
+          #products {
+            background: url('./images/background-2-full.png') no-repeat center center / cover;
+            min-height: 100vh;  /* makes the section at least full screen height */
+            background-attachment: fixed; /* optional: nice parallax */
+          }
+          #contact {
+            background: url('./images/background-4.png') no-repeat center center / cover;
+          }
+          #home h1 {
+            text-shadow: 14px 14px black;
+          }
+          #home p {
+            text-shadow: 2px 2px black;
+          }
+          #products h2, #about h2, #contact h2{
+            text-shadow: 0px 4px black;
+          }
+          #home a,
+          #products a {
+            box-shadow: 5px 10px rgba(0, 0, 0, 0.5);
             font-weight: bold;
-        }
-        #about, #contact {
+          }
+          #about, #contact {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: start;
+          }
+          #about #about-img,
+          #contact #contact-img {
+            box-shadow: 0px 10px rgba(0, 0, 0, 0.5);
+          }
         }
-        #about #about-img { box-shadow: 0px 10px rgba(0,0,0,0.5); }
-        #products a{
-            box-shadow: 0px 10px rgba(0,0,0,0.5); 
-            font-weight: bold;
+
+        /* Reveal animation — exclude #home to prevent initial scroll jump */
+        /*section:not(#home) {
+          opacity: 0;
+          transform: translateY(50px);
+          transition: all 0.8s ease-out;
+        }*/
+
+        /*section:not(#home).visible {
+          opacity: 1;
+          transform: translateY(0);
+        }*/
+
+        /* Optional: animation for hero elements */
+        .animate-in {
+          opacity: 0;
+          transform: translateY(20px);
+          animation: fadeInUp 0.8s ease forwards;
         }
-        #contact #contact-img { box-shadow: 0px 10px rgba(0,0,0,0.5); }
-    }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
     </style>
+
+
+  
+
 </head>
 <body>
 
 <!-- Navbar -->
-<nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container-fluid px-4">
-        <a class="navbar-brand" href="#"><img id="logo" src="./images/logo.jpg" class="rounded-circle"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
-                <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-            </ul>
-        </div>
+
+<div class="d-flex justify-content-between align-items-center fixed-top px-5 py-3 gap-2">
+  <!-- Navbar -->
+
+  <nav id="navbar" class="navbar navbar-expand-lg bg-dark rounded-pill shadow px-4 py-2 ">
+    <div class="container-fluid p-0 d-flex align-items-center justify-content-between">
+      <!-- Burger first -->
+      <button class="navbar-toggler me-2 border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Brand next -->
+      <a class="navbar-brand text-white" href="#">
+        <span class="d-none d-md-inline fw-bold">Yebuna Firē</span>
+        <span class="d-inline d-md-none fw-bold">Yebuna</span>
+      </a>
+
+      <!-- Menu (collapsible) -->
+      <div class="collapse navbar-collapse justify-content-end ms-5" id="navbarNav">
+        <ul class="navbar-nav gap-5">
+          <li class="nav-item"><a class="nav-link text-white" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#about">About Us</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#products">Products</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#contact">Contact</a></li>
+        </ul>
+      </div>
     </div>
-</nav>
+  </nav>
+
+
+  <!-- Contact Button -->
+  <div class="navbar nav-contact d-flex justify-content-center align-items-center" id="nav-contact-us">
+
+    <!-- Medium and up: show full text -->
+    <a href="#contact" class="d-none d-md-inline text-white px-3 text-decoration-none fw-bold contact-us">
+      CALL <i class="fa-solid fa-phone"></i>
+    </a>
+
+    <!-- Small screens: show phone icon only -->
+    <a href="tel:09778561015" class="d-inline d-md-none text-white px-3 text-decoration-none fs-5">
+      <i class="fa-solid fa-phone"></i>
+    </a>
+
+  </div>
+
+</div>
 
 <!-- Landing -->
-<section id="home" class="hero">
-    <div id="particles-js"></div>
-    <div class="hero-content z-3">
-        <h1>Yebuna Fire</h1>
-        <p>Taste the premiumness of organic coffee at a reasonable price</p>
-        <a href="#products" class="btn btn-light">Explore Products</a>
-    </div>
+<section id="home" class="hero ps-0 pt-3">
+  <!-- <div id="particles-js"></div> -->
+  <div class="container-fluid">
+    
+        <h1 class="ps-5 fw-bolder" id="hero-title"> <span id="yebuna">Yebuna</span> <span id="fire">Firē</span></h1>
+        <p class="ps-5" id="tagline">One sip to taste your success</p>
+        <a href="#products" class="btn btn-light ms-5" id="call-to-action">Explore Products</a>
+      
+  
+  </div>
 </section>
+
 
 <!-- About Us -->
 <section id="about" class="py-5">
@@ -150,71 +432,147 @@
 </section>
 
 <!-- Products -->
-<section id="products" class="py-5 bg-light">
+<section id="products" class="py-5">
     <div class="container px-5">
         <h2 class="text-center mb-4">Our Products</h2>
         <div class="row">
             
 
            
+            <div class="col-md-4 mb-4">
+              <div class="card">
+
+
+                <img src="./images/2025-products/Robusta-250.png" class="p-3 card-img-top img-fluid" alt="Product 1">
+                <div class="card-body">
+                  <h5 class="card-title">Robusta</h5>
+
+                  <!-- Product description -->
+                  <p class="card-text description">
+                    Grown across Southeast Asia and Africa, Robusta coffee (Coffea canephora) 
+                    <span class="more-text d-none">
+                      is known for its strong, bold, and earthy flavor profile. It carries a slightly bitter edge and delivers a heavy body with woody, nutty, and earthy notes. With its high caffeine content and smooth, low-brightness finish, Robusta is ideal for those who enjoy a full and intense cup. Best enjoyed through espresso, moka pot, or drip coffee maker, this medium-dark roast captures the grounded essence of traditional coffee culture. 
+                      Available from 10 grams for drip coffee, ground coffee from 250 g to 1 kg, and whole beans. Open for wholesale and supplies with discounts.
+                    </span>
+                  </p>
+
+                  <!-- Toggle button -->
+                  <button class="btn btn-link p-0 read-more-btn">Read more</button>
+
+                  <p class="card-text mt-3 fw-bold">₱ 269</p>
+                  <a href="#contact" class="btn btn-light">Contact to Order</a>
+                </div>
+              </div>
+            </div>
 
             
                 
             <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="./images/products/D.jpg" class="card-img-top" alt="Product 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Arabica (250g)</h5>
-                        <p class="card-text">P259</p>
-                        <a href="#contact" class="btn btn-light">Contact to Order</a>
-                    </div>
+              <div class="card">
+                <img src="./images/2025-products/Premium_Barako-250.png" class="p-3 card-img-top img-fluid" alt="Product 1">
+                <div class="card-body">
+                  <h5 class="card-title">Premium Barako</h5>
+
+                  <!-- Product description -->
+                 <p class="card-text description">
+                  Cultivated in Batangas and Cavite, Philippines, Barako or Coffea liberica
+                   <span class="more-text d-none">
+                     
+                        
+                           
+                     is celebrated for its strong and intense flavor. This coffee stands out with fruity, woody, and floral notes, creating a rich and aromatic experience in every sip. Known for its heavy body and smooth, balanced character, Barako captures the bold spirit of traditional Filipino coffee culture. Perfect for espresso, pour-over, French press, or drip coffee, this medium-dark roast offers a full-bodied cup that’s both invigorating and uniquely Filipino.
+                       Available from 10 grams for drip coffee, ground coffee from 250 g to 1 kg, and whole beans. Open for wholesale and supplies with discounts.
+                   </span>
+                 </p>
+
+                  <!-- Toggle button -->
+                  <button class="btn btn-link p-0 read-more-btn">Read more</button>
+
+                  <p class="card-text mt-3 fw-bold">₱ 269</p>
+                  <a href="#contact" class="btn btn-light">Contact to Order</a>
                 </div>
+              </div>
             </div>
 
             <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="./images/products/D.jpg" class="card-img-top" alt="Product 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Arabica (500g)</h5>
-                        <p class="card-text">P499</p>
-                        <a href="#contact" class="btn btn-light">Contact to Order</a>
-                    </div>
+              <div class="card">
+                <img src="./images/2025-products/Kalinga-250.png" class="p-3 card-img-top img-fluid" alt="Product 1">
+                <div class="card-body">
+                  <h5 class="card-title">Kalinga</h5>
+
+                  <!-- Product description -->
+                  <p class="card-text description">
+                   Grown in the highlands of Kalinga, Northern Philippines,  
+                    <span class="more-text d-none">
+                      
+                        this Robusta variety embodies the bold character of the region’s rich coffee heritage.
+                       It offers a bold, earthy, and nutty flavor with a slightly smoky finish, balanced by a smooth and well-rounded body. With notes of roasted grains and nuts, Kalinga Robusta delivers a comforting depth that suits both traditional and modern brews. Best enjoyed through espresso, pour-over, French press, or drip coffee, this medium-dark roast highlights the hearty flavor and resilience of Philippine-grown coffee.
+                      Available from 10 grams for drip coffee, ground coffee from 250 g to 1 kg, and whole beans. Open for wholesale and supplies with discounts.
+                    </span>
+                  </p>
+                  
+
+                  <!-- Toggle button -->
+                  <button class="btn btn-link p-0 read-more-btn">Read more</button>
+
+                  <p class="card-text mt-3 fw-bold">₱ 269</p>
+                  <a href="#contact" class="btn btn-light">Contact to Order</a>
                 </div>
+              </div>
             </div>
+
 
             <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="./images/products/E.jpg" class="card-img-top" alt="Product 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Barako (250g)</h5>
-                        <p class="card-text">P269</p>
-                        <a href="#contact" class="btn btn-light">Contact to Order</a>
-                    </div>
+              <div class="card">
+                <img src="./images/2025-products/Sagada_Arabica-250.png" class="p-3 card-img-top img-fluid" alt="Product 1">
+                <div class="card-body">
+                  <h5 class="card-title">Sagada Arabica</h5>
+
+                  <!-- Product description -->
+                  <p class="card-text description">
+                   Grown in the cool mountain climate of Sagada, Northern Philippines, 
+                    <span class="more-text d-none">
+                        this Arabica Typica variety is cherished for its balanced profile with a hint of light fruitiness. Each cup reveals floral, nutty, and caramel notes, offering a smooth and comforting experience that reflects the serenity of its highland origin. With a medium body and medium roast, Sagada Arabica is perfect for espresso, pour-over, or drip coffee maker, delivering a refined taste that appeals to both everyday drinkers and coffee enthusiasts.
+
+                      <br>
+
+                      Available from 10 grams for drip coffee, ground coffee from 250 g to 1 kg, and whole beans. Open for wholesale and supplies with discounts.
+                    </span>
+                  </p>
+
+                  <!-- Toggle button -->
+                  <button class="btn btn-link p-0 read-more-btn">Read more</button>
+
+                  <p class="card-text mt-3 fw-bold">₱ 309</p>
+                  <a href="#contact" class="btn btn-light">Contact to Order</a>
                 </div>
+              </div>
             </div>
+
 
             <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="./images/products/E.jpg" class="card-img-top" alt="Product 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Barako (500g)</h5>
-                        <p class="card-text">P479</p>
-                        <a href="#contact" class="btn btn-light">Contact to Order</a>
-                    </div>
-                </div>
-            </div>
+              <div class="card">
+                <img src="./images/2025-products/Ethiopia_Arabica-250.png" class="p-3 card-img-top img-fluid" alt="Product 1">
+                <div class="card-body">
+                  <h5 class="card-title">Ethiopia Arabica</h5>
 
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="./images/products/F.jpg" class="card-img-top" alt="Product 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Coffee Drips</h5>
-                        <p class="card-text">P39</p>
-                        <a href="#" class="btn btn-light">Contact to Order</a>
-                    </div>
-                </div>
-            </div>
+                  <!-- Product description -->
+                  <p class="card-text description">
+                   Sourced from the renowned coffee-growing region of Yirgacheffe, 
+                    <span class="more-text d-none">
+                        Sourced from the renowned coffee-growing region of Yirgacheffe, Ethiopia, this Ethiopian Heirloom Arabica is known for its bright and lively character. It features fruity and floral notes with hints of citrus, jasmine, and berries, creating a delicate yet vibrant cup. With a light to medium body and roast, Yirgacheffe Arabica offers a clean, aromatic profile that shines through in espresso, pour-over, French press, drip, or cold brew. A favorite among specialty coffee lovers, it’s celebrated for its refined flavor and unmistakable origin.
+                        Available from 10 grams for drip coffee, ground coffee from 250 g to 1 kg, and whole beans. Open for wholesale and supplies with discounts.
+                    </span>
+                  </p>
 
+                  <!-- Toggle button -->
+                  <button class="btn btn-link p-0 read-more-btn">Read more</button>
+
+                  <p class="card-text mt-3 fw-bold">₱ 549</p>
+                  <a href="#contact" class="btn btn-light">Contact to Order</a>
+                </div>
+              </div>
+            </div>
             <!-- more products -->
         </div>
     </div>
@@ -229,8 +587,25 @@
                <img id="contact-img" src="./images/contact.jpg" class="img-fluid w-75">
             </div>
             <div class="col-md-6 text-center text-md-start mt-4 mt-md-0 ">
-                <h5>House</h5>
-                <p class="">Paquita Street, Barangay 462, <br> Manila, Philippines, 1015<br>Phone: 0977 856 1015</p>
+                
+                <div class="d-flex flex-column gap-3" id="contact-icons">
+                    <a href="https://www.facebook.com/YebunaFire.PH" target="_blank">
+                        <i class="fa-brands fa-facebook" ></i><label class="text-white ms-3">YebunaFire.PH</label>
+                    </a>
+
+                    <a href="https://www.tiktok.com/@yebunafire" target="_blank">
+                        <i class="fa-brands fa-tiktok" ></i><label class="text-white ms-3">@yebunafire</label>
+                    </a>
+
+                    <a href="https://www.instagram.com/yebuna_fire" target="_blank">
+                        <i class="fa-brands fa-instagram" ></i><label class="text-white ms-3">yebuna_fire</label>
+                    </a>
+
+                    <a href="https://yebunafire.myshopify.com/" target="_blank">
+                        <i class="fa-brands fa-shopify" ></i><label class="text-white ms-3">yebunafire.myshopify.com</label>
+                    </a>
+
+                </div>
             </div>
         </div>
     </div>
@@ -238,16 +613,57 @@
 
 <!-- Footer -->
 <footer id="footer" class="footer text-center bg-dark text-white">
-    <div class="container-fluid text-start">
-        <p class="mb-0">&copy; 2025 Yebuna Fire || Website (c) Topher and Rey</p>
+
+    <span class="container-fluid text-start">
+    Copyright &copy; 2025 Yebuna Fire || Website (c) 
+            <a href="https://trillionray.online/" target="_blank"  class="text-warning">Trillion Ray</a>
+            <a href="https://www.facebook.com/topherKatigbak/" target="_blank" class="text-white"> Topher Katigbak</a> ||
+
+            
+            <a href="tel:09778561015" class="text-white">
+                <i class="fa-solid fa-phone" class="me-4"></i>09950986604
+           </a>
+            
+          
+
+    </span>
+
+
+        <a href="#home" class="ms-auto">
+            <i class="fa-solid fa-arrow-up text-white" id="call-dev" ></i>
+        </a>
+
+
+        <style>
+            #footer #call-dev{
+                border: 2px solid white;
+                padding: 5px;
+                float: right;
+            }
+
+            #footer {
+              position: relative;              /* helps z-index take effect */
+              z-index: 5;                      /* bring footer above previous section */
+              border-top: 3px solid white;
+              padding: 20px;
+              background-color: #111;          /* ensures shadow contrast */
+              box-shadow: 0 -8px 20px rgba(0, 0, 0, 1); /* light upward glow */
+            }
+
+            #footer a:hover{
+                font-size: 20px;
+            }
+        </style>
     </div>
+
+   
 </footer>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- tsParticles -->
 <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
-<script>
+<!-- <script>
 tsParticles.load("particles-js", {
   background: { color: "transparent" },
   fullScreen: { enable: false },
@@ -255,14 +671,78 @@ tsParticles.load("particles-js", {
     number: { value: 40 },
     color: { value: "#ffffff" },
     shape: { type: "circle" },
-    opacity: { value: 0.2 },
-    size: { value: 4, random: { enable: true, minimumValue: 1 } },
-    move: { enable: true, speed: 0.3, direction: "none", random: false, straight: false, outModes: "out" }
+    opacity: { value: 0.08 },
+    size: { value: 50, random: { enable: true, minimumValue: 1 } },
+    move: { enable: true, speed: 0.5, direction: "none", random: false, straight: false, outModes: "out" }
   },
   interactivity: {
     events: { onHover: { enable: false }, onClick: { enable: false } }
   }
 });
+</script> -->
+
+<!-- Read More Script -->
+<script>
+document.querySelectorAll('.read-more-btn').forEach(button => {
+  button.addEventListener('click', () => {
+    const card = button.closest('.card-body');
+    const moreText = card.querySelector('.more-text');
+
+    if (moreText.classList.contains('d-none')) {
+      moreText.classList.remove('d-none');
+      button.textContent = 'Read less';
+    } else {
+      moreText.classList.add('d-none');
+      button.textContent = 'Read more';
+    }
+  });
+});
+</script>
+
+<script>
+// 👌 Section scroll reveal animation
+document.addEventListener("DOMContentLoaded", () => {
+  const sections = document.querySelectorAll("section");
+
+  const revealOnScroll = () => {
+    const triggerBottom = window.innerHeight * 0.85;
+
+    sections.forEach(section => {
+      const boxTop = section.getBoundingClientRect().top;
+
+      if (boxTop < triggerBottom) {
+        section.classList.add("visible");
+      } else {
+        section.classList.remove("visible"); // optional: hides again when scrolled up
+      }
+    });
+  };
+
+  // Run when the page loads and on scroll
+  window.addEventListener("scroll", revealOnScroll);
+  revealOnScroll();
+});
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const elements = [
+      document.getElementById("hero-title"),
+      document.getElementById("tagline"),
+      document.getElementById("call-to-action")
+    ];
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate-in");
+          observer.unobserve(entry.target); // animate only once
+        }
+      });
+    }, { threshold: 0.2 });
+
+    elements.forEach(el => observer.observe(el));
+  });
 </script>
 
 </body>
